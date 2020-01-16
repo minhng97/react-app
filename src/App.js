@@ -14,13 +14,19 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        
-          {
-            this.todoItems.map((item, index) => (
+        { this.todoItems.length > 0
+          ? this.todoItems.map((item, index) => <TodoItem key={index} item={item} />)
+          : "There is nothing here"
+        }
+          {/* {
+            this.todoItems.length > 0 && this.todoItems.map((item, index) => (
               <TodoItem key={index} item={item} />
     ))
           }
 
+          {
+            this.todoItems.length === 0 && <div className="App">Nothing Here</div>
+          } */}
       </div>
     );
   }
