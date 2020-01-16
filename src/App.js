@@ -18,15 +18,7 @@ class App extends React.Component {
           ? this.todoItems.map((item, index) => <TodoItem key={index} item={item} />)
           : "There is nothing here"
         }
-          {/* {
-            this.todoItems.length > 0 && this.todoItems.map((item, index) => (
-              <TodoItem key={index} item={item} />
-    ))
-          }
 
-          {
-            this.todoItems.length === 0 && <div className="App">Nothing Here</div>
-          } */}
       </div>
     );
   }
