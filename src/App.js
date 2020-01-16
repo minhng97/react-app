@@ -6,21 +6,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.todoItems = [
-      'Go shopping', 'Eat dinner', 'Go to sleep'
+      {title: 'Go shopping', isComplete: false}, 
+      {title: 'Eat dinner', isComplete: true},
+      {title: 'Go to sleep', isComplete: true}
     ];
   }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
         
           {
             this.todoItems.map((item, index) => (
-              <TodoItem key={index} title={item} />
+              <TodoItem key={index} item={item} />
     ))
           }
 
-  </header>
       </div>
     );
   }
