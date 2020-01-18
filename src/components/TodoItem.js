@@ -3,14 +3,14 @@ import './TodoItem.css';
 var classname = require('classname');
 class TodoItem extends Component {
     render() {
-        const {item} = this.props;
+        const { item, onClick } = this.props;
         let className = classname({
             'TodoItem': true,
             'TodoItem-complete': item.isComplete
         });
 
         return (
-            <div className={className}>
+            <div onClick={onClick} className={className}>
                 <p> { item.title } </p>
             </div>
         )
