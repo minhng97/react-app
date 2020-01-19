@@ -15,25 +15,33 @@ class App extends React.Component {
 
   }
 
-  onItemClicked(index) {
-    this.setState(state => {
-      const todoItems = state.todoItems;
-      let itemToChange = todoItems[index]
-      itemToChange.isComplete = !itemToChange.isComplete
-      todoItems[index] = itemToChange
+  onItemClicked(item) {
+    return () => {
+      const isComplete = item.isComplete;
+      const {todoItems} = this.state;
+      const index = todoItems.indexOf(item);
       
-      console.log(this.state.todoItems[index])
-      return {
-        todoItems
-      }
-  });
+      this.setState(state => {
+        console.log(item)
+        return {
+          todoItems: [
+            ...todoItems.slice(0, index),
+            {
+              ...item, isComplete: !isComplete
+            },
+            ...todoItems.slice(index + 1)
+          ]
+        }
+    });
   
+    }
+  // console.log(this.state.todoItems)
   }
   render() {
     return (
       <div className="App">
         { this.state.todoItems.length > 0
-          ? this.state.todoItems.map((item, index) => <TodoItem key={index} item={item} onClick={this.onItemClicked.bind(this, index)} />)
+          ? this.state.todoItems.map((item, index) => <TodoItem key={index} item={item} onClick={this.onItemClicked(item)} />)
           : "There is nothing here"
         }
 
