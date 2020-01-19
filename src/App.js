@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import TodoItem from './components/TodoItem';
 import tick from './img/tick.svg';
+// var classNames = require('classnames');
 
 const ACTIVE = 'active';
 const COMPLETED = 'completed';
@@ -21,6 +22,7 @@ class App extends React.Component {
     this.onKeyUp = this.onKeyUp.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
     this.checkAll = this.checkAll.bind(this);
+    this.clearCompleted = this.clearCompleted.bind(this);
   }
 
   onItemClicked(item) {
@@ -84,8 +86,18 @@ class App extends React.Component {
     })
   }
 
+  clearCompleted() {
+    let { todoItems } = this.state;
+    todoItems = todoItems.filter(item => item.isComplete === false);
+    this.setState({
+      todoItems: [
+        ...todoItems
+      ]
+    })
+  }
   render() {
     let { todoItems, currentFilter } = this.state;
+    const COMPLETED_ITEMS = todoItems.filter(item => item.isComplete === true);
 
     switch (currentFilter) {
       case (ACTIVE):
@@ -126,6 +138,10 @@ class App extends React.Component {
           : "There is nothing here"
         }
 
+        {COMPLETED_ITEMS.length > 0
+          ? <input type="button" onClick={() => this.clearCompleted()} value="Clear completed" />
+          : ''
+        }
       </div>
     );
   }
