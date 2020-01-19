@@ -15,6 +15,7 @@ class App extends React.Component {
     }
 
     this.onKeyUp = this.onKeyUp.bind(this);
+    this.changeFilter = this.changeFilter.bind(this);
   }
 
   onItemClicked(item) {
@@ -24,6 +25,7 @@ class App extends React.Component {
       const index = todoItems.indexOf(item);
 
       this.setState({
+        currentFilter: 'all',
         todoItems: [
           ...todoItems.slice(0, index),
           {
@@ -55,15 +57,34 @@ class App extends React.Component {
     }
   }
 
+  changeFilter(filter) {
+    this.setState({
+      currentFilter: filter
+    })
+  }
+
   render() {
+    let { todoItems, currentFilter } = this.state; 
+
+    if (currentFilter === 'active') {
+      todoItems = todoItems.filter(item => item.isComplete === false)
+    } else if (currentFilter === 'completed') {
+      todoItems = todoItems.filter(item => item.isComplete === true)
+    }
+
     return (
       <div className="App">
         <div className="Header">
           <img src={tick} width="32" height="32" alt="create" onClick={() => this.onKeyUp} />
           <input type="text" placeholder="Add a new item" onKeyUp={this.onKeyUp} />
         </div>
-        {this.state.todoItems.length > 0
-          ? this.state.todoItems.map((item, index) =>
+
+        <input type="button" onClick ={() => this.changeFilter('all')} value="all" />
+        <input type="button" onClick ={() => this.changeFilter('active')} value="active" />
+        <input type="button" onClick ={() => this.changeFilter('completed')} value="completed" />
+
+        {todoItems.length > 0
+          ? todoItems.map((item, index) =>
             <TodoItem key={index} item={item} onClick={this.onItemClicked(item)} />)
           : "There is nothing here"
         }
