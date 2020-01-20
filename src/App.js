@@ -43,6 +43,17 @@ class App extends React.Component {
       });
     }
   }
+  onClickedRemove(item) {
+    return () => {
+      let { todoItems } = this.state;
+      todoItems = todoItems.filter(todo => todo !== item);
+      this.setState({
+        todoItems: [
+          ...todoItems
+        ]
+      })
+    }
+  }
   onKeyUp(event) {
     if (event.keyCode === ENTER_KEY) {
       let text = event.target.value;
@@ -95,6 +106,8 @@ class App extends React.Component {
       ]
     })
   }
+
+
   render() {
     let { todoItems, currentFilter } = this.state;
     const COMPLETED_ITEMS = todoItems.filter(item => item.isComplete === true);
@@ -109,38 +122,55 @@ class App extends React.Component {
       default:
     }
 
+
     return (
       <div className="App">
         <div className="Header">
-
-          <img src={tick} width="32" height="32"
+          <img
+            src={tick}
+            width="32" height="32"
             alt="create"
             onClick={this.checkAll}
           />
-
-          <input type="text"
+          <input
+            type="text"
             placeholder="Add a new item"
             onKeyUp={this.onKeyUp}
           />
-
         </div>
 
-        <input type="button"
-          onClick={() => this.changeFilter('all')} value="all" />
-        <input type="button"
-          onClick={() => this.changeFilter('active')} value="active" />
-        <input type="button"
-          onClick={() => this.changeFilter('completed')} value="completed" />
+        <input
+          type="button"
+          onClick={() => this.changeFilter('all')}
+          value="all" />
+
+        <input
+          type="button"
+          onClick={() => this.changeFilter('active')}
+          value="active" />
+
+        <input
+          type="button"
+          onClick={() => this.changeFilter('completed')}
+          value="completed" />
 
         {todoItems.length > 0
           ? todoItems.map((item, index) =>
-            <TodoItem key={index} item={item} onClick={this.onItemClicked(item)} />)
+            <TodoItem
+              key={index}
+              item={item}
+              onClick={this.onItemClicked(item)}
+              onClickRemove={this.onClickedRemove(item)} />
+          )
+
           : "There is nothing here"
         }
 
         {COMPLETED_ITEMS.length > 0
-          ? <input type="button" onClick={() => this.clearCompleted()} value="Clear completed" />
-          : ''
+          && <input
+            type="button"
+            onClick={() => this.clearCompleted()}
+            value="Clear completed" />
         }
       </div>
     );
