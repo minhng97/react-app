@@ -1,13 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './TodoItem.css';
 import checkImg from '../img/check.svg';
 import checkCompleteImg from '../img/check-complete.svg';
+import removeImg from '../img/remove.svg';
 var classname = require('classname');
 
 
+const REMOVE_IMG = removeImg;
 class TodoItem extends Component {
     render() {
-        const { item, onClick } = this.props;
+        const { item, onClick, onClickRemove } = this.props;
         let url = checkImg;
         if (item.isComplete) { url = checkCompleteImg };
         let className = classname({
@@ -17,8 +19,19 @@ class TodoItem extends Component {
 
         return (
             <div className={className}>
-                <img onClick={onClick} src={url} alt="checkimg" width="32" height="32" />
-                <p> { item.title } </p>
+                <img
+                    onClick={onClick}
+                    src={url}
+                    alt="checking"
+                    width="32"
+                    height="32" />
+                <p> {item.title} </p>
+                <img
+                    onClick={onClickRemove}
+                    src={REMOVE_IMG}
+                    alt="remove"
+                    width="32" height="32"
+                    style={{ position: "absolute", right: '0' }} />
             </div>
         )
     }
