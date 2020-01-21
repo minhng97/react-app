@@ -121,6 +121,8 @@ class App extends React.Component {
 
   render() {
     let { todoItems, currentFilter } = this.state;
+    let uncompleted = todoItems.filter(item => item.isComplete === false);
+    
     const COMPLETED_ITEMS = todoItems.filter(item => item.isComplete === true);
 
     switch (currentFilter) {
@@ -153,7 +155,7 @@ class App extends React.Component {
             <input
               type="button"
               onClick={this.resetForm}
-              value="Reset form" />
+              value="Clear" />
           </form>
         </div>
 
@@ -172,6 +174,7 @@ class App extends React.Component {
           onClick={() => this.changeFilter('completed')}
           value="completed" />
 
+        <span style={{right: "5px", position: "absolute"}}> {uncompleted.length} item left</span>
         {todoItems.length > 0
           ? todoItems.map((item, index) =>
             <TodoItem
