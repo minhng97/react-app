@@ -72,6 +72,14 @@ background-size: 100%;
 }
 .App form {
   display: flex;
+  padding: 0;
+}
+.App form input[type="button"] {
+  position: absolute;
+  right: 5px;
+  width: fit-content;
+  padding: 6px 12px;
+  font-size: small;
 }
 .App-logo {
   height: 40vmin;
