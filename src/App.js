@@ -11,6 +11,8 @@ const ENTER_KEY = 13;
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.inputElement = React.createRef();
+
     this.state = {
       todoItems: [
         { title: 'Go shopping', isComplete: false },
@@ -23,6 +25,15 @@ class App extends React.Component {
     this.changeFilter = this.changeFilter.bind(this);
     this.checkAll = this.checkAll.bind(this);
     this.clearCompleted = this.clearCompleted.bind(this);
+    this.resetForm = this.resetForm.bind(this);
+  }
+
+  componentDidMount() {
+    this.inputElement.current.focus();
+  }
+  resetForm() {
+    console.log(this.inputElement.current)
+    this.inputElement.current.reset();
   }
 
   onItemClicked(item) {
@@ -125,18 +136,25 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <div className="Header">
+        <div className="Header gradient">
           <img
             src={tick}
             width="32" height="32"
             alt="create"
             onClick={this.checkAll}
           />
-          <input
-            type="text"
-            placeholder="Add a new item"
-            onKeyUp={this.onKeyUp}
-          />
+          <form
+            ref={this.inputElement}>
+            <input
+              type="text"
+              placeholder="Add a new item"
+              onKeyUp={this.onKeyUp}
+            />
+            <input
+              type="button"
+              onClick={this.resetForm}
+              value="Reset form" />
+          </form>
         </div>
 
         <input
