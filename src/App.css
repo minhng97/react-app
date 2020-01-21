@@ -4,29 +4,57 @@
   border: 1px solid #eeeeee;
   width: 500px;
   position: relative;
+  background: rgb(173, 54, 227);
+  background: linear-gradient(
+    346deg,
+    rgba(173, 54, 227, 1) 31%,
+    rgba(157, 172, 210, 1) 87%
+  );
+  border-radius: 8px;
 }
 .App img:hover {
-  opacity: .5;
+  opacity: 0.5;
   cursor: pointer;
 }
+.App input[type="text"] {
+  background: none;
+}
+.App input[type="text"]::placeholder {
+color: #eeeeee;
+}
+
+.App input[type="button"] {
+  background: rgb(151, 159, 245);
+  background: linear-gradient(
+    346deg,
+    rgba(151, 159, 245, 1) 31%,
+    rgba(157, 172, 210, 1) 87%
+  );
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+}
 .App input[type="button"]:hover {
-  border-style: solid;
+  color: #3e4053;
   cursor: pointer;
 }
 .App input[type="button"]:active {
-  border-style: outset;
-  border-color: white;
+  background: rgb(151, 159, 245);
+  background: linear-gradient(
+    346deg,
+    rgb(150, 154, 211) 31%,
+    rgb(158, 173, 212) 87%
+  );
 }
 .App .Header {
   padding: 10px 5px;
   display: flex;
+  border-radius: 2px 8px 1px 34px;
 }
 .App .Header input {
+  color: #eeeeee;
   width: 100%;
-  font-family: 'Helvetica Neue', 
-  Helvetica,
-  Arial,
-  sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   font-size: 24px;
   border: none;
@@ -68,4 +96,18 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.gradient {
+  background-color: #9dacd2;
+  background-image: linear-gradient(
+    346deg,
+    rgba(157, 172, 210, 1) 31%,
+    rgba(227, 54, 159, 1) 87%
+  );
+  background-size: 100%;
+  /* -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent; */
 }
